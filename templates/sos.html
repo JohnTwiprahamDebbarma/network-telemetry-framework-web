@@ -2,114 +2,150 @@
 
 {% block title %}SOS Information - Network Telemetry Framework{% endblock %}
 
+{% block extra_css %}
+<style>
+    .sos-header {
+        background: linear-gradient(135deg, var(--danger-color), #c0392b);
+        padding: 2rem;
+        border-radius: var(--border-radius-large);
+        margin-bottom: 2rem;
+        color: white;
+        box-shadow: var(--shadow-medium);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+    }
+    
+    .sos-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1), transparent 25%),
+            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1), transparent 25%);
+        z-index: 0;
+    }
+    
+    .sos-header h1 {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: #ffffff;
+    }
+    
+    .sos-header h1 i {
+        font-size: 2rem;
+        animation: pulse 2s infinite;
+    }
+    
+    .sos-alert-banner {
+        background-color: rgba(231, 76, 60, 0.1);
+        border-left: 4px solid var(--danger-color);
+        padding: 1rem 1.5rem;
+        margin-bottom: 2rem;
+        border-radius: var(--border-radius);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .sos-alert-icon {
+        font-size: 2rem;
+        color: var(--danger-color);
+        animation: pulse 2s infinite;
+    }
+    
+    .sos-alert-message {
+        flex: 1;
+    }
+    
+    .sos-alert-message h3 {
+        margin-bottom: 0.25rem;
+        color: var(--danger-color);
+    }
+    
+    .sos-alert-message p {
+        margin: 0;
+        color: var(--text-color);
+    }
+    
+    .status-value.danger {
+        color: var(--danger-color);
+        animation: pulse 2s infinite;
+        font-weight: bold;
+    }
+    
+    .status-value.warning {
+        color: var(--warning-color);
+        animation: pulse 2s infinite;
+        font-weight: bold;
+    }
+    
+    .status-message {
+        font-size: 0.8rem;
+        margin-top: 5px;
+        color: var(--text-light);
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="sos-container">
+<div class="container">
     <div class="sos-header">
         <h1><i class="fas fa-exclamation-triangle"></i> SOS Information</h1>
-        <a href="{{ url_for('index') }}" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
     
-    <div class="sos-content">
-        <div class="sos-card emergency">
-            <div class="sos-icon">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div class="sos-info">
-                <h2>Network Emergency</h2>
-                <p>Critical issues that require immediate attention</p>
-                <div class="contact-info">
-                    <p><i class="fas fa-phone"></i> Emergency Hotline: +1-800-555-0199</p>
-                    <p><i class="fas fa-envelope"></i> emergency@networktelemetry.com</p>
-                </div>
-                <a href="#" class="emergency-action-btn">Initiate Emergency Protocol</a>
-            </div>
+    <div class="sos-alert-banner">
+        <div class="sos-alert-icon">
+            <i class="fas fa-exclamation-circle"></i>
         </div>
-        
-        <div class="sos-card protocols">
-            <div class="sos-icon">
-                <i class="fas fa-clipboard-list"></i>
-            </div>
-            <div class="sos-info">
-                <h2>Emergency Protocols</h2>
-                <ul>
-                    <li><i class="fas fa-check-circle"></i> Isolate affected network segments</li>
-                    <li><i class="fas fa-check-circle"></i> Contact network administrator</li>
-                    <li><i class="fas fa-check-circle"></i> Implement containment measures</li>
-                    <li><i class="fas fa-check-circle"></i> Document the incident</li>
-                    <li><i class="fas fa-check-circle"></i> Begin recovery procedures</li>
-                </ul>
-            </div>
+        <div class="sos-alert-message">
+            <h3>Emergency Response System Active</h3>
+            <p>This page provides critical information and contacts for network emergencies. Review the SOS data table for current incident reports.</p>
         </div>
-        
-        <div class="sos-card contacts">
-            <div class="sos-icon">
-                <i class="fas fa-address-book"></i>
-            </div>
-            <div class="sos-info">
-                <h2>Emergency Contacts</h2>
-                <div class="contact-list">
-                    <div class="contact">
-                        <div class="contact-avatar">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <div class="contact-details">
-                            <p class="contact-name">Network Operations Center</p>
-                            <p class="contact-role">Available 24/7</p>
-                            <p class="contact-phone"><i class="fas fa-phone"></i> +1-888-555-0123</p>
-                        </div>
-                        <button class="contact-call-btn"><i class="fas fa-phone"></i></button>
-                    </div>
-                    <div class="contact">
-                        <div class="contact-avatar">
-                            <i class="fas fa-user-shield"></i>
-                        </div>
-                        <div class="contact-details">
-                            <p class="contact-name">Security Team</p>
-                            <p class="contact-role">For security breaches</p>
-                            <p class="contact-phone"><i class="fas fa-phone"></i> +1-888-555-0124</p>
-                        </div>
-                        <button class="contact-call-btn"><i class="fas fa-phone"></i></button>
-                    </div>
-                    <div class="contact">
-                        <div class="contact-avatar">
-                            <i class="fas fa-user-cog"></i>
-                        </div>
-                        <div class="contact-details">
-                            <p class="contact-name">System Administrator</p>
-                            <p class="contact-role">For system-wide issues</p>
-                            <p class="contact-phone"><i class="fas fa-phone"></i> +1-888-555-0125</p>
-                        </div>
-                        <button class="contact-call-btn"><i class="fas fa-phone"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="sos-card resources">
-            <div class="sos-icon">
-                <i class="fas fa-book-open"></i>
-            </div>
-            <div class="sos-info">
-                <h2>Emergency Resources</h2>
-                <div class="resource-list">
-                    <a href="#" class="resource-item">
-                        <i class="fas fa-file-pdf"></i>
-                        <span>Network Recovery Guide</span>
-                    </a>
-                    <a href="#" class="resource-item">
-                        <i class="fas fa-file-alt"></i>
-                        <span>Security Incident Response Plan</span>
-                    </a>
-                    <a href="#" class="resource-item">
-                        <i class="fas fa-file-code"></i>
-                        <span>Network Diagnostics Toolkit</span>
-                    </a>
-                    <a href="#" class="resource-item">
-                        <i class="fas fa-file-video"></i>
-                        <span>Training: Handling Network Emergencies</span>
-                    </a>
-                </div>
-            </div>
+    </div>
+
+    <div class="data-section">
+        <h2 class="section-title"><i class="fas fa-exclamation-circle"></i> SOS Data</h2>
+        <div class="table-container">
+            <table class="data-table" id="sos-data-table">
+                <thead>
+                    <tr>
+                        {% for key in sos_data[0].keys() %}
+                        <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in sos_data %}
+                    <tr>
+                        {% for value in row.values() %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
     
@@ -118,19 +154,46 @@
         <div class="status-indicators">
             <div class="status-item">
                 <div class="status-label">Academic Area</div>
-                <div class="status-value normal">Normal</div>
+                <div class="status-value {{ network_status['Academic Area']['status'] }}">
+                    {% if network_status['Academic Area']['status'] == 'danger' %}
+                    Warning
+                    {% else %}
+                    Normal
+                    {% endif %}
+                </div>
+                {% if network_status['Academic Area']['message'] %}
+                <div class="status-message">{{ network_status['Academic Area']['message'] }}</div>
+                {% endif %}
             </div>
             <div class="status-item">
                 <div class="status-label">Hostel Area</div>
-                <div class="status-value normal">Normal</div>
+                <div class="status-value {{ network_status['Hostel Area']['status'] }}">
+                    {% if network_status['Hostel Area']['status'] == 'danger' %}
+                    Warning
+                    {% else %}
+                    Normal
+                    {% endif %}
+                </div>
+                {% if network_status['Hostel Area']['message'] %}
+                <div class="status-message">{{ network_status['Hostel Area']['message'] }}</div>
+                {% endif %}
             </div>
             <div class="status-item">
                 <div class="status-label">Housing Area</div>
-                <div class="status-value normal">Normal</div>
+                <div class="status-value {{ network_status['Housing Area']['status'] }}">
+                    {% if network_status['Housing Area']['status'] == 'danger' %}
+                    Warning
+                    {% else %}
+                    Normal
+                    {% endif %}
+                </div>
+                {% if network_status['Housing Area']['message'] %}
+                <div class="status-message">{{ network_status['Housing Area']['message'] }}</div>
+                {% endif %}
             </div>
             <div class="status-item">
                 <div class="status-label">Last Checked</div>
-                <div class="status-value">Just now</div>
+                <div class="status-value" id="last-checked-time">Just now</div>
             </div>
         </div>
     </div>
@@ -138,5 +201,169 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{{ url_for('static', filename='js/sos.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Update the "Last Checked" time
+    const lastCheckedTime = document.getElementById('last-checked-time');
+    if (lastCheckedTime) {
+        const now = new Date();
+        const formattedTime = now.toLocaleString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        lastCheckedTime.textContent = formattedTime;
+    }
+    
+    // Search functionality for SOS data table
+    const searchInput = document.getElementById('sos-search');
+    searchInput.addEventListener('keyup', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const rows = document.querySelectorAll('#sos-data-table tbody tr');
+        
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+    
+    // Table sorting functionality
+    document.querySelectorAll('#sos-data-table th').forEach(header => {
+        header.style.cursor = 'pointer';
+        header.addEventListener('click', () => {
+            const table = header.closest('table');
+            const index = Array.from(header.parentNode.children).indexOf(header);
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+            const ascending = header.getAttribute('data-sort') === 'asc';
+            
+            // Reset all headers
+            table.querySelectorAll('th').forEach(th => {
+                th.removeAttribute('data-sort');
+                th.classList.remove('sort-asc', 'sort-desc');
+            });
+            
+            // Set sort direction
+            header.setAttribute('data-sort', ascending ? 'desc' : 'asc');
+            header.classList.add(ascending ? 'sort-desc' : 'sort-asc');
+            
+            // Sort the rows
+            rows.sort((a, b) => {
+                const aValue = a.children[index].textContent.trim();
+                const bValue = b.children[index].textContent.trim();
+                
+                // Try to sort as numbers if possible
+                if (!isNaN(aValue) && !isNaN(bValue)) {
+                    return ascending ? Number(aValue) - Number(bValue) : Number(bValue) - Number(aValue);
+                }
+                
+                // Otherwise sort as strings
+                return ascending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            });
+            
+            // Re-append rows in the sorted order
+            const tbody = table.querySelector('tbody');
+            rows.forEach(row => {
+                tbody.appendChild(row);
+            });
+        });
+    });
+    
+    // Emergency button functionality
+    const emergencyButton = document.querySelector('.emergency-action-btn');
+    if (emergencyButton) {
+        emergencyButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Show confirmation dialog
+            const confirm = window.confirm('Are you sure you want to initiate emergency protocol? This will alert all network administrators.');
+            
+            if (confirm) {
+                // Simulated emergency protocol initiation
+                emergencyButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Initiating Protocol...';
+                emergencyButton.style.backgroundColor = '#c0392b';
+                emergencyButton.style.pointerEvents = 'none';
+                
+                // Simulate response after 3 seconds
+                setTimeout(() => {
+                    emergencyButton.innerHTML = '<i class="fas fa-check"></i> Protocol Initiated';
+                    
+                    // Show alert
+                    showAlert('Emergency protocol initiated. Administrators have been notified.', 'success');
+                }, 3000);
+            }
+        });
+    }
+    
+    // Function to show alerts
+    function showAlert(message, type) {
+        // Check if alert container exists
+        let alertContainer = document.querySelector('.alert-container');
+        
+        // Create alert container if it doesn't exist
+        if (!alertContainer) {
+            alertContainer = document.createElement('div');
+            alertContainer.className = 'alert-container';
+            alertContainer.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+                width: 300px;
+            `;
+            document.body.appendChild(alertContainer);
+        }
+        
+        // Create the alert
+        const alert = document.createElement('div');
+        alert.className = `alert alert-${type}`;
+        alert.innerHTML = message;
+        
+        // Style the alert
+        alert.style.cssText = `
+            background-color: ${getAlertColor(type)};
+            color: white;
+            padding: 12px 15px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.3s, transform 0.3s;
+        `;
+        
+        // Add to container
+        alertContainer.appendChild(alert);
+        
+        // Trigger animation
+        setTimeout(() => {
+            alert.style.opacity = '1';
+            alert.style.transform = 'translateX(0)';
+        }, 10);
+        
+        // Remove after 5 seconds
+        setTimeout(() => {
+            alert.style.opacity = '0';
+            alert.style.transform = 'translateX(50px)';
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 300);
+        }, 5000);
+    }
+    
+    // Function to get alert color based on type
+    function getAlertColor(type) {
+        switch(type) {
+            case 'success': return '#2ecc71';
+            case 'warning': return '#f39c12';
+            case 'danger': return '#e74c3c';
+            case 'info': default: return '#3498db';
+        }
+    }
+});
+</script>
 {% endblock %}
