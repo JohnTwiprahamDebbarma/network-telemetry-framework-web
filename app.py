@@ -1,5 +1,4 @@
 from flask import Flask, render_template, jsonify
-from flask_socketio import SocketIO
 import os
 import glob
 import csv
@@ -7,9 +6,6 @@ import pandas as pd
 import re
 
 app = Flask(__name__)
-
-# Initialize extensions
-socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route('/')
 def index():
