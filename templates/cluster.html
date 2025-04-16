@@ -4,7 +4,6 @@
 
 {% block extra_css %}
 <style>
-    /* Specific styles for this page that don't need to go in the main CSS */
     .dashboard-loader {
         position: fixed;
         top: 0;
@@ -51,8 +50,13 @@
         <p class="timestamp">Last updated: <span id="current-time">Loading...</span></p>
     </div>
     <div class="cluster-actions">
+        {% if cluster_id != 3 %}
         <a href="{{ url_for('router', cluster_id=cluster_id) }}" class="router-button"><i class="fas fa-router"></i> View Router</a>
+        {% endif %}
+        
+        {% if cluster_id == 3 %}
         <a href="{{ url_for('firewall', cluster_id=cluster_id) }}" class="firewall-button"><i class="fas fa-shield-alt"></i> View Firewall</a>
+        {% endif %}
     </div>
 </div>
 
@@ -61,10 +65,12 @@
     <div class="device-panel">
         <h2 class="panel-title"><i class="fas fa-server"></i> Devices </h2>
         <div class="device-grid">
+            {% if cluster_id != 3 %}
             <div class="device-card">
                 <div class="device-icon"><i class="fas fa-router"></i></div>
                 <h3>Router</h3>
             </div>
+            {% endif %}
             
             <div class="device-card">
                 <div class="device-icon"><i class="fas fa-network-wired"></i></div>
@@ -76,10 +82,12 @@
                 <h3>Switch 2</h3>
             </div>
             
+            {% if cluster_id == 3 %}
             <div class="device-card">
                 <div class="device-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Firewall</h3>
             </div>
+            {% endif %}
         </div>
     </div>
     
